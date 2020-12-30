@@ -1,4 +1,4 @@
-from board import Player
+from business_rules.board import Player
 
 
 class GamePresenter:

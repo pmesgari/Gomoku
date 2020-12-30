@@ -1,5 +1,5 @@
-from game_presenter import GamePresenter
-from board import Player
+from ui.game_presenter import GamePresenter
+from business_rules.board import Player
 
 
 # read format as representation

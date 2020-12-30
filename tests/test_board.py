@@ -1,5 +1,5 @@
 import pytest
-from board import Player, BadLocation, SpaceOccupied
+from business_rules.board import Player, BadLocation, SpaceOccupied
 
 
 def test_new_board_has_no_stones(board):
@@ -14,10 +14,10 @@ def test_can_add_stones_in_bounds(board):
     placed_stone = board.get(1, 1)
     assert placed_stone == Player.White
 
-    board.place(board.WIDTH - 1, board.HEIGHT - 1, Player.Black)
+    board.place(board.get_width() - 1, board.get_height() - 1, Player.Black)
     assert board.stones_placed() == 2
 
-    placed_stone = board.get(board.WIDTH - 1, board.HEIGHT - 1)
+    placed_stone = board.get(board.get_width() - 1, board.get_height() - 1)
     assert placed_stone == Player.Black
 
 
