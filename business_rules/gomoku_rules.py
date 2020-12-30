@@ -1,6 +1,3 @@
-from board import Player
-
-
 class GomokuRules:
     def is_win(self, board, player):
         if self.is_row_win(board, player)\

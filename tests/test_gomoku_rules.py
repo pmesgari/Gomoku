@@ -1,4 +1,4 @@
-from board import Player, Board
+from business_rules.board import Player, make_board
 
 
 def test_empty_board_is_not_win(rules, board):
@@ -36,7 +36,7 @@ def test_four_in_a_row_in_the_first_row_is_a_lose(rules, board):
 
 def test_five_consecutive_in_any_row_is_a_win(rules, board):
     for row in range(0, board.HEIGHT):
-        board = Board()
+        board = make_board()
         for col in range(0, 5):
             board.place(col, row, Player.White)
         assert rules.is_win(board, Player.White)
