@@ -33,9 +33,10 @@ class ViewController:
         self.grid_view.set_click_responder(lambda col, row: self.respond_to_click(col, row))
 
     def respond_to_click(self, column, row):
+        clicking_player = self.game.whose_turn()
         self.game.take_turn(column, row)
-        if self.game.get_rules().is_win(self.game.get_board(), self.game.whose_turn()):
-            self.status_label.set_text(self.presenter.get_win_status(self.game.whose_turn()))
+        if self.game.get_rules().is_win(self.game.get_board(), clicking_player):
+            self.status_label.set_text(self.presenter.get_win_status(clicking_player))
         else:
             self.status_label.set_text(self.presenter.get_player_status(self.game.whose_turn()))
 
