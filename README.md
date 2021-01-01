@@ -1,55 +1,25 @@
 #Gomoku
-##Iteration 1
-Starting with the Game
-First part of the Game is the Board
-We need to be able to put Pieces on the Board
-We must be able to detect wins
-Once a piece is in you can't change it
 
-Have the GUI fit the internals and not the other way around.
-Because the GUI will keep changing.
+![gomoku](gomoku.png)
 
-How do we want to represent the board?
-- We can have a dictionary with keys the coordinates and the values the players
+This repository contains an implementation of Gomoku game. The main goals for creating this application were:
 
-Build something to verify very quickly. Remember TDD is all about instant feedback.
+- Developing an application by exercising **Test Driven Development** (TDD)
+- Implementing a clean architecture where modules are decoupled in such a way that 
+as the application grows the base can adapt easily
+- Having some fun while learning!
 
-##Iteration 2
-Testing stone placements at board bounds
-High levels must dominate low levels
-Its better to let the exception happen at run time and deal with it
+To really understand the main concepts underlying the logic and architecture of this repository
+the reader is advised to study the articles below:
 
-We want to be able to detect a win
-Is this something that the board must do? Or a higher level policy
-A higher level policy, so that board can be reusable if need be
+- [Gomoku Part 1: Understanding the Game, Setup and Base](https://pmesgari.github.io/techhighlands/article/gomoku-1)
+- [Gomoku Part 2: Understanding the Geometry and Win Algorithm](https://pmesgari.github.io/techhighlands/article/gomoku-2)
+- [Gomoku Part 3: Understanding the Architecture and Decisions Made](https://pmesgari.github.io/techhighlands/article/gomoku-3)
 
-test_names = the given condition(setup)_assertion you are making
+##References
 
+Implementing this application was my own personal experience in applying the concepts and 
+ways of working I have studied through the following materials.
 
-###Rules and the board
-- the board has the rules
-- the rules has the board
-- the rules gets passed the board everytime rules need to be decided
-
-If rules are hold onto the board
-- You can't call the rules function with any other boards, imagine a stack of board for which
-we need to determine a win quickly.
-
-For now we can keep our options open
-
-Rules could be just a bunch of methods, however, it feels like the rules will have local state, in which case
-it is best to have instances of the rules.
-
-###Policy
-Low level policy for detecting win/loss -> gomoku rules
-High level policy for managing turns -> game procedures
-
-These policies are kept separate, so that if one changes the other is not affected.
-But still one of them has to know about the other, so what is the direction of the
-dependency?
-
-The direction of dependency is a function of which is policy and which is a low level detail.
-
-###Model View Presenter
-The core idea behind the presenter is to allow testing without getting into the screen.\
-When writing code which is testable, it is more about the design of the code rather than testability
+- [Clean Architecture](https://www.amazon.com/Clean-Architecture-Craftsmans-Software-Structure/dp/0134494164#ace-g9859629705)
+- [Clean Agile](https://www.amazon.com/Clean-Agile-Basics-Robert-Martin/dp/0135781868/ref=sr_1_11?dchild=1&qid=1609541426&refinements=p_27%3ARobert+Martin&s=books&sr=1-11&text=Robert+Martin)
