@@ -51,7 +51,16 @@ class Board(BaseBoard):
         self.WIDTH = 19
         self.HEIGHT = 19
         self.placed_stones = {}
+        self.grid = self.init_grid()
         self.player = Player.White
+
+    def init_grid(self):
+        grid = []
+        for column in range(0, self.WIDTH):
+            grid.append([])
+            for row in range(0, self.HEIGHT):
+                grid[column].append(Player.Empty)
+        return grid
 
     def stones_placed(self):
         return len(self.placed_stones)
@@ -62,9 +71,21 @@ class Board(BaseBoard):
     def get_height(self):
         return self.HEIGHT
 
+    def get_grid(self):
+        return self.grid
+
     def place(self, column, row, player):
+        self._place(column, row, player)
+        if self.get(column, row) != Player.Empty:
+            raise SpaceOccupied
+        self.grid[column][row] = player
+
+    def get(self, column, row):
+        return self.grid[column][row]
+
+    def _place(self, column, row, player):
         loc = self.make_location(column, row)
-        if self.placed_stones.get(loc, None):
+        if self.get(column, row) != Player.Empty:
             raise SpaceOccupied
         self.placed_stones[loc] = player
 
@@ -73,7 +94,7 @@ class Board(BaseBoard):
             raise BadLocation
         return column * self.WIDTH + row
 
-    def get(self, column, row):
+    def _get(self, column, row):
         loc = self.make_location(column, row)
         stone = self.placed_stones.get(loc, None)
         if stone:

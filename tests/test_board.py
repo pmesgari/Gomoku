@@ -49,3 +49,4 @@ def test_cannot_place_stone_outside_bounds(board):
     with pytest.raises(BadLocation):
         board.place(board.WIDTH + 1, 0, Player.White)
     assert board.stones_placed() == 0
+

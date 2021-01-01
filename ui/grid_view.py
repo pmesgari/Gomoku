@@ -28,14 +28,18 @@ class GridView:
             line = self.canvas.create_line((
                 x_pos, self.cell_size,
                 x_pos, self.cell_size * (self.cell_count - 1)),
-                fill='black')
+                fill='black',
+                tags=('v-line', 'line')
+            )
             self.canvas.tag_bind(line, '<Button-1>', self.add_stone)
         for i in range(1, self.cell_count):
             y_pos = i * self.cell_size
             line = self.canvas.create_line((
                 self.cell_size, y_pos,
                 self.cell_size * (self.cell_count - 1), y_pos),
-                fill='black')
+                fill='black',
+                tags=('h-line', 'line')
+            )
             self.canvas.tag_bind(line, '<Button-1>', self.add_stone)
 
     def draw_stones(self):
@@ -61,4 +65,9 @@ class GridView:
         self.click_responder(clicked_column, clicked_row)
         self.draw_stones()
         print(f'{clicked_row}, {clicked_column}')
+
+    def unset_click_tag(self):
+        tags = self.canvas.find_withtag('line')
+        for tag in tags:
+            self.canvas.tag_unbind(tag, '<Button-1>')
 

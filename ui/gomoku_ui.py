@@ -37,6 +37,7 @@ class ViewController:
         self.game.take_turn(column, row)
         if self.game.get_rules().is_win(self.game.get_board(), clicking_player):
             self.status_label.set_text(self.presenter.get_win_status(clicking_player))
+            self.grid_view.unset_click_tag()
         else:
             self.status_label.set_text(self.presenter.get_player_status(self.game.whose_turn()))
 
