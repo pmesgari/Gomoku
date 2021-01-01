@@ -56,3 +56,14 @@ def test_five_consecutive_stones_in_a_column_is_a_win(rules, board):
     for row in range(0, 5):
         board.place(0, row, Player.White)
     assert rules.is_win(board, Player.White)
+
+
+def test_has_consecutive(rules):
+    assert rules.is_consecutive(['w', 'w', 'w', 'w', 'w', 'b', 'b', 'w'], 5, 'w') is True
+    assert rules.is_consecutive(['w', 'w', 'w', 'w', 'w', 'w', 'w', 'w'], 5, 'w') is True
+    assert rules.is_consecutive(['w', 'b', 'b', 'w', 'w', 'w', 'w', 'w'], 5, 'w') is True
+    assert rules.is_consecutive([], 5, 'w') is False
+    assert rules.is_consecutive(['b', 'b', 'b', 'b', 'b', 'b', 'b', 'b'], 5, 'w') is False
+    assert rules.is_consecutive(['w', 'b', 'b', 'w', 'w', 'b', 'b', 'w'], 5, 'w') is False
+
+
