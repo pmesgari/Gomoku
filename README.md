@@ -1,4 +1,4 @@
-#Gomoku
+# Gomoku
 
 ![gomoku](gomoku.png)
 
@@ -16,7 +16,7 @@ the reader is advised to study the articles below:
 - [Gomoku Part 2: Understanding the Geometry and Win Algorithm](https://pmesgari.github.io/techhighlands/article/gomoku-2)
 - [Gomoku Part 3: Understanding the Architecture and Decisions Made](https://pmesgari.github.io/techhighlands/article/gomoku-3)
 
-##References
+## References
 
 Implementing this application was my own personal experience in applying the concepts and 
 ways of working I have studied through the following materials.
