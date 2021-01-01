@@ -2,6 +2,7 @@ import tkinter as tk
 from ui.grid_view import GridView
 from ui.status_label import StatusLabel
 from ui.game_presenter import GamePresenter
+from ui.new_game_button import NewGameButton
 from business_rules.game import Game
 
 
@@ -31,6 +32,15 @@ class ViewController:
             board=self.game.get_board()
         )
         self.grid_view.set_click_responder(lambda col, row: self.respond_to_click(col, row))
+        self.new_game_button = NewGameButton(
+            self.frame
+        )
+        self.new_game_button.set_new_game_responder(lambda: self.respond_to_new_game())
+
+    def respond_to_new_game(self):
+        self.game = self.game.make_new_game()
+        self.grid_view.reset(self.game.get_board())
+        self.status_label.set_text(self.presenter.get_player_status(self.game.whose_turn()))
 
     def respond_to_click(self, column, row):
         clicking_player = self.game.whose_turn()
