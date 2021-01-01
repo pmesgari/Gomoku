@@ -7,6 +7,10 @@ class Game:
         self.board = make_board()
         self.rules = GomokuRules()
 
+    @classmethod
+    def make_new_game(cls):
+        return cls()
+
     def take_turn(self, column, row):
         return self.board.take_turn(column, row)
 

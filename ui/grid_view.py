@@ -25,22 +25,21 @@ class GridView:
     def draw_grid(self):
         for i in range(1, self.cell_count):
             x_pos = i * self.cell_size
-            line = self.canvas.create_line((
+            self.canvas.create_line((
                 x_pos, self.cell_size,
                 x_pos, self.cell_size * (self.cell_count - 1)),
                 fill='black',
                 tags=('v-line', 'line')
             )
-            self.canvas.tag_bind(line, '<Button-1>', self.add_stone)
         for i in range(1, self.cell_count):
             y_pos = i * self.cell_size
-            line = self.canvas.create_line((
+            self.canvas.create_line((
                 self.cell_size, y_pos,
                 self.cell_size * (self.cell_count - 1), y_pos),
                 fill='black',
                 tags=('h-line', 'line')
             )
-            self.canvas.tag_bind(line, '<Button-1>', self.add_stone)
+        self.set_click_tag('line', self.add_stone)
 
     def draw_stones(self):
         for col in range(0, self.board.WIDTH):
@@ -57,7 +56,12 @@ class GridView:
                         center[1] - radius,
                         center[0] + radius,
                         center[1] + radius,
-                        fill=color)
+                        fill=color,
+                        tags='stone'
+                    )
+
+    def clear_stones(self):
+        self.canvas.delete('stone')
 
     def add_stone(self, event):
         clicked_column = int((event.x - self.cell_size) / self.cell_size + .5)
@@ -70,4 +74,19 @@ class GridView:
         tags = self.canvas.find_withtag('line')
         for tag in tags:
             self.canvas.tag_unbind(tag, '<Button-1>')
+
+    def set_click_tag(self, tag, tag_handler):
+        tags = self.canvas.find_withtag(tag)
+        for tag in tags:
+            self.canvas.tag_bind(tag, '<Button-1>', tag_handler)
+
+    def rebind_click_tag(self):
+        self.unset_click_tag()
+        self.set_click_tag('line', self.add_stone)
+
+    def reset(self, board):
+        self.board = board
+        self.clear_stones()
+        self.rebind_click_tag()
+
 
